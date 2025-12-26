@@ -1,0 +1,22 @@
+{
+  "name": "akonsec-school-website",
+  "version": "1.0.0",
+  "description": "Akonsec School Website",
+  "private": true,
+  "scripts": {
+    "build": "node build-static.js",
+    "dev": "python run_dev_server.py",
+    "collect-static": "python manage.py collectstatic --noinput"
+  },
+  "keywords": [
+    "school",
+    "website",
+    "django",
+    "vercel"
+  ],
+  "author": "Akonsec",
+  "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  }
+}

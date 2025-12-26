@@ -1,0 +1,22 @@
+# Development dependencies
+*.pyc
+__pycache__/
+*.sqlite3
+.git
+.gitignore
+node_modules/
+.env.local
+.env.*.local
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+.next/
+out/
+.nuxt/
+.cache/
+.vuepress/dist/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
