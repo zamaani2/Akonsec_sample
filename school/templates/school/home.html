@@ -1,0 +1,1603 @@
+{% extends 'school/base.html' %} {% block content %}
+<style>
+  :root {
+    --primary-color: #1a4d2e;
+    --primary-light: #2a6d4e;
+    --secondary-color: #ffd700;
+    --white: #ffffff;
+    --gray: #666666;
+    --dark-gray: #333333;
+    --background-light: #f7f9fc;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Arial", sans-serif;
+  }
+
+  body {
+    padding-top: 60px;
+    background-color: var(--background-light);
+    color: var(--gray);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .container > *:not(.hero) {
+    padding: 2rem;
+  }
+
+  /* Hero Section - Modern Design */
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: -60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    visibility: hidden;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-section {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center !important;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .carousel-slide.active .hero-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+  }
+
+  .carousel-btn.prev {
+    left: 20px;
+  }
+
+  .carousel-btn.next {
+    right: 20px;
+  }
+
+  .carousel-btn i {
+    font-size: 1.5rem;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--secondary-color);
+    transform: scale(1.2);
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .hero-title span {
+    color: var(--secondary-color);
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .hero-btn {
+    padding: 1rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+
+  .hero-btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: -1;
+  }
+
+  .hero-btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+  }
+
+  .hero-btn-primary:hover {
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-btn-primary:before {
+    background-color: var(--primary-color);
+  }
+
+  .hero-btn-primary:hover:before {
+    width: 100%;
+  }
+
+  .hero-btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    backdrop-filter: blur(5px);
+  }
+
+  .hero-btn-secondary:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-btn-secondary:before {
+    background-color: var(--white);
+  }
+
+  .hero-btn-secondary:hover:before {
+    width: 100%;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-text {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .section-title {
+    position: relative;
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .section-title::before {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    border-radius: 4px;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+      width: 40px;
+    }
+    50% {
+      opacity: 0.5;
+      width: 60px;
+    }
+    100% {
+      opacity: 1;
+      width: 40px;
+    }
+  }
+
+  .section-subtitle {
+    font-size: 1.3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 1.5rem auto 3.5rem;
+    color: var(--gray);
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin: 50px 0;
+    padding: 40px 20px;
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.03) 0%,
+      rgba(26, 77, 46, 0.06) 100%
+    );
+    border-radius: 15px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .stat-card {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .stat-icon {
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 15px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a4d2e;
+    margin-bottom: 5px;
+  }
+
+  .stat-text {
+    color: #666;
+    font-size: 1rem;
+  }
+
+  /* Leadership Section - Modern Design */
+  .leadership {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 4rem auto;
+    max-width: 1200px;
+    perspective: 1000px;
+  }
+
+  .leader {
+    width: 280px;
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .leader:hover {
+    transform: translateY(-15px) rotateX(5deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .leader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .leader:hover::before {
+    transform: scaleX(1);
+  }
+
+  .leader::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(26, 77, 46, 0.03), transparent);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .leader:hover::after {
+    opacity: 1;
+  }
+
+  .leader img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin-bottom: 1.8rem;
+    object-fit: cover;
+    border: 5px solid var(--white);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader:hover img {
+    transform: scale(1.1) translateY(-10px);
+    border-color: var(--secondary-color);
+  }
+
+  .leader h4 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gray);
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--primary-light)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    background-color: rgba(26, 77, 46, 0.05);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Modern animations */
+  .zoom-in {
+    animation: zoomIn 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      padding: 0 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      gap: 15px;
+    }
+
+    .hero-content {
+      padding: 2rem 1rem;
+    }
+
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-btn.prev {
+      left: 10px;
+    }
+
+    .carousel-btn.next {
+      right: 10px;
+    }
+
+    .leader {
+      width: 260px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero-buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .hero-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  /* Programs Section Styles */
+  .programs-section {
+    padding: 4rem 0;
+    background: var(--background-light);
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .program-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    text-align: center;
+  }
+
+  .program-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow);
+  }
+
+  .program-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+
+  .program-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .program-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .program-link:hover {
+    color: var(--secondary-color);
+  }
+
+  /* Campus Life Section Styles */
+  .campus-life-section {
+    padding: 4rem 0;
+  }
+
+  .campus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .campus-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+
+  .campus-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+
+  .campus-card:hover img {
+    transform: scale(1.1);
+  }
+
+  .campus-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: var(--white);
+  }
+
+  /* News Section Styles */
+  .news-section {
+    padding: 4rem 0;
+    background: var(--background-light);
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .news-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    transition: var(--transition);
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+  }
+
+  .news-date {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 80px;
+  }
+
+  .news-date .day {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .news-content {
+    padding: 1.5rem;
+  }
+
+  .news-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 1rem;
+  }
+
+  /* Facilities Section Styles */
+  .facilities-section {
+    padding: 4rem 0;
+  }
+
+  .facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .facility-card {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+  }
+
+  .facility-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+  }
+
+  .facility-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .facility-card h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .facility-card p {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--gray);
+  }
+
+  /* CTA Section Styles */
+  .cta-section {
+    padding: 4rem 0;
+    background: linear-gradient(
+      45deg,
+      var(--primary-color),
+      var(--primary-light)
+    );
+    color: var(--white);
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .cta-btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .cta-btn.primary {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    border: 2px solid var(--white);
+    color: var(--white);
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .news-card {
+      flex-direction: column;
+    }
+
+    .news-date {
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+    }
+  }
+
+  /* Welcome Message Section Styles */
+  .welcome-message-section {
+    padding: 4rem 0;
+    background: var(--background-light);
+  }
+
+  .welcome-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .welcome-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+  }
+
+  .welcome-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+  }
+
+  /* Headmaster's Message Styles */
+  .headmaster-message {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .welcome-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .headmaster-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary-color);
+  }
+
+  .welcome-title h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .welcome-title .subtitle {
+    color: var(--gray);
+    font-size: 1.1rem;
+  }
+
+  .welcome-content p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: var(--dark-gray);
+  }
+
+  /* Vision & Mission Styles */
+  .vision-mission {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .vision-box,
+  .mission-box {
+    padding: 2rem;
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.03),
+      rgba(26, 77, 46, 0.06)
+    );
+    border-radius: 15px;
+    transition: var(--transition);
+  }
+
+  .vision-box:hover,
+  .mission-box:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.05),
+      rgba(26, 77, 46, 0.08)
+    );
+  }
+
+  .icon-box {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-box i {
+    font-size: 1.8rem;
+    color: var(--white);
+  }
+
+  .vision-box h3,
+  .mission-box h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Core Values Styles */
+  .core-values h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.03),
+      rgba(26, 77, 46, 0.06)
+    );
+    border-radius: 15px;
+    transition: var(--transition);
+  }
+
+  .value-item:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.05),
+      rgba(26, 77, 46, 0.08)
+    );
+  }
+
+  .value-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+
+  .value-item h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value-item p {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .welcome-header {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .headmaster-img {
+      width: 150px;
+      height: 150px;
+    }
+
+    .welcome-title h2 {
+      font-size: 1.8rem;
+    }
+
+    .vision-mission {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+  <div class="carousel-container">
+    <div class="carousel-slide active">
+      <div
+        class="hero-section"
+        style="
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/slide2.jpg') center/cover no-repeat;">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Welcome to <span>Akontombra Senior High School</span>
+          </h1>
+          <p class="hero-subtitle">Seek Knowledge, Be Diligent and Work Hard</p>
+          <div class="hero-buttons">
+            <a href="#about" class="hero-btn hero-btn-primary"
+              >Learn More <i class="fas fa-arrow-right"></i
+            ></a>
+            <a href="#contact" class="hero-btn hero-btn-secondary"
+              >Contact Us <i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-slide">
+      <div
+        class="hero-section"
+        style="
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('/static/emergency_block.jpg') center/cover no-repeat;
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">Excellence in <span>Education</span></h1>
+          <p class="hero-subtitle">
+            We nurture future leaders with top-notch education
+          </p>
+          <div class="hero-buttons">
+            <a href="#programs" class="hero-btn hero-btn-primary"
+              >Our Programs <i class="fas fa-graduation-cap"></i
+            ></a>
+            <a href="#about" class="hero-btn hero-btn-secondary"
+              >About Us <i class="fas fa-info-circle"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-slide">
+      <div
+        class="hero-section"
+        style="
+          background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+            url('/static/slide2.jpg') center/cover no-repeat;
+        "
+      >
+        <div class="hero-content">
+          <h1 class="hero-title">A Thriving <span>Student Life</span></h1>
+          <p class="hero-subtitle">
+            Explore our extracurricular activities and clubs
+          </p>
+          <div class="hero-buttons">
+            <a href="#student-life" class="hero-btn hero-btn-primary"
+              >Student Life <i class="fas fa-users"></i
+            ></a>
+            <a href="#gallery" class="hero-btn hero-btn-secondary"
+              >Gallery <i class="fas fa-images"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-btn prev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="carousel-btn next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div class="carousel-dots">
+      <span class="dot active" data-slide="0"></span>
+      <span class="dot" data-slide="1"></span>
+      <span class="dot" data-slide="2"></span>
+    </div>
+  </div>
+</section>
+
+<!-- Welcome Message Section -->
+
+
+<!-- Stats Section -->
+<div class="container">
+   <!-- Welcome Section -->
+  <section class="section welcome-section" id="welcome">
+    <h2 class="section-title">
+      WELCOME TO <span>AKONTOMBRA SENIOR HIGH SCHOOL</span>
+    </h2>
+    <p class="section-subtitle">
+      Empowering students through quality education, innovative teaching
+      methods, and a supportive learning environment.
+    </p>   
+  </section>
+    <section class="welcome-message-section">
+    <div class="welcome-grid">
+      <!-- Headmaster's Message -->
+      <div class="welcome-card headmaster-message">
+        <div class="welcome-header">
+          <img
+            src="/static/headmaster.jpg"
+            alt="Headmaster"
+            class="headmaster-img"
+          />
+          <div class="welcome-title">
+            <h2>Headmaster's Welcome</h2>
+            <p class="subtitle">Mr. John Smith</p>
+          </div>
+        </div>
+        <div class="welcome-content">
+          <p>
+            Welcome to Akontombra Senior High School, where excellence meets
+            opportunity. Our institution is committed to nurturing young minds
+            and preparing them for a successful future. Through our
+            comprehensive educational programs and supportive environment, we
+            strive to develop well-rounded individuals who are ready to make a
+            positive impact in society.
+          </p>
+          <p>
+            At Akontombra SHS, we believe in the power of education to transform
+            lives. Our dedicated team of educators works tirelessly to provide
+            quality education that combines academic excellence with character
+            development.
+          </p>
+        </div>
+      </div>
+
+      <!-- Vision & Mission -->
+      <div class="welcome-card vision-mission">
+        <div class="vision-box">
+          <div class="icon-box">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Our Vision</h3>
+          <p>
+            To be a leading educational institution that produces well-rounded,
+            innovative, and responsible global citizens who excel in their
+            chosen fields and contribute positively to society.
+          </p>
+        </div>
+        <div class="mission-box">
+          <div class="icon-box">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Our Mission</h3>
+          <p>
+            To provide quality education through innovative teaching methods,
+            modern facilities, and a supportive environment that nurtures
+            academic excellence, character development, and leadership skills.
+          </p>
+        </div>
+      </div>
+
+      <!-- Core Values -->
+      <div class="welcome-card core-values">
+        <h3>Our Core Values</h3>
+        <div class="values-grid">
+          <div class="value-item">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>Excellence</h4>
+            <p>Striving for the highest standards in all our endeavors</p>
+          </div>
+          <div class="value-item">
+            <i class="fas fa-handshake"></i>
+            <h4>Integrity</h4>
+            <p>Maintaining honesty and strong moral principles</p>
+          </div>
+          <div class="value-item">
+            <i class="fas fa-users"></i>
+            <h4>Respect</h4>
+            <p>Valuing diversity and treating everyone with dignity</p>
+          </div>
+          <div class="value-item">
+            <i class="fas fa-lightbulb"></i>
+            <h4>Innovation</h4>
+            <p>Embracing creativity and continuous improvement</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="stats-section">
+    <h2 class="section-title">Our Academic Excellence</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="stat-number" data-count="25">25+</div>
+        <div class="stat-text">Years of Excellence</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="stat-number" data-count="96">96%</div>
+        <div class="stat-text">Graduation Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <div class="stat-number" data-count="65">65</div>
+        <div class="stat-text">Qualified Teachers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="stat-number" data-count="5">5</div>
+        <div class="stat-text">Academic Programs</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Academic Programs Section -->
+  <section class="programs-section" id="programs">
+    <h2 class="section-title">Our Academic Programs</h2>
+    <p class="section-subtitle">
+      Comprehensive education pathways designed for your success
+    </p>
+
+    <div class="programs-grid">
+      <div class="program-card">
+        <div class="program-icon">
+          <i class="fas fa-flask"></i>
+        </div>
+        <h3>Science</h3>
+        <p>Biology, Chemistry, Physics, and Elective Mathematics</p>
+        <a href="#" class="program-link"
+          >Learn More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+
+      <div class="program-card">
+        <div class="program-icon">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <h3>Business</h3>
+        <p>Financial Accounting, Cost Accounting, and Business Management</p>
+        <a href="#" class="program-link"
+          >Learn More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+
+      <div class="program-card">
+        <div class="program-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3>General Arts</h3>
+        <p>Literature, French, Government, and Economics</p>
+        <a href="#" class="program-link"
+          >Learn More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+
+      <div class="program-card">
+        <div class="program-icon">
+          <i class="fas fa-laptop-code"></i>
+        </div>
+        <h3>Home Economics</h3>
+        <p>Food and Nutrition, Management in Living, and Economics</p>
+        <a href="#" class="program-link"
+          >Learn More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campus Life Section -->
+  <section class="campus-life-section" id="campus-life">
+    <h2 class="section-title">Campus Life</h2>
+    <p class="section-subtitle">
+      Experience a vibrant and enriching school environment
+    </p>
+
+    <div class="campus-grid">
+      <div class="campus-card">
+        <img src="/static/clubs.jpg" alt="Student Clubs" />
+        <div class="campus-content">
+          <h3>Student Clubs</h3>
+          <p>
+            Join various clubs and societies to develop your interests and
+            leadership skills
+          </p>
+        </div>
+      </div>
+
+      <div class="campus-card">
+        <img src="/static/sports.jpg" alt="Sports" />
+        <div class="campus-content">
+          <h3>Sports & Athletics</h3>
+          <p>Participate in competitive sports and stay physically active</p>
+        </div>
+      </div>
+
+      <div class="campus-card">
+        <img src="/static/arts.jpg" alt="Arts & Culture" />
+        <div class="campus-content">
+          <h3>Arts & Culture</h3>
+          <p>Express yourself through music, drama, and cultural activities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News & Events Section -->
+  <section class="news-section" id="news">
+    <h2 class="section-title">Latest News & Events</h2>
+    <p class="section-subtitle">
+      Stay updated with our school's latest happenings
+    </p>
+
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-date">
+          <span class="day">15</span>
+          <span class="month">Mar</span>
+        </div>
+        <div class="news-content">
+          <h3>Annual Science Fair</h3>
+          <p>
+            Join us for our annual science exhibition showcasing student
+            innovations
+          </p>
+          <a href="#" class="news-link">Read More</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-date">
+          <span class="day">20</span>
+          <span class="month">Mar</span>
+        </div>
+        <div class="news-content">
+          <h3>Sports Day</h3>
+          <p>Annual inter-house sports competition and athletic meet</p>
+          <a href="#" class="news-link">Read More</a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-date">
+          <span class="day">25</span>
+          <span class="month">Mar</span>
+        </div>
+        <div class="news-content">
+          <h3>Career Fair</h3>
+          <p>
+            Meet professionals from various fields and explore career
+            opportunities
+          </p>
+          <a href="#" class="news-link">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities Section -->
+  <section class="facilities-section" id="facilities">
+    <h2 class="section-title">Our Facilities</h2>
+    <p class="section-subtitle">
+      State-of-the-art infrastructure for optimal learning
+    </p>
+
+    <div class="facilities-grid">
+      <div class="facility-card">
+        <img src="/static/library.jpg" alt="Library" />
+        <h3>Modern Library</h3>
+        <p>Well-stocked library with digital resources and study spaces</p>
+      </div>
+
+      <div class="facility-card">
+        <img src="/static/lab.jpg" alt="Science Lab" />
+        <h3>Science Labs</h3>
+        <p>Fully equipped laboratories for practical learning</p>
+      </div>
+
+      <div class="facility-card">
+        <img src="/static/sports-complex.jpg" alt="Sports Complex" />
+        <h3>Sports Complex</h3>
+        <p>Modern sports facilities for various athletic activities</p>
+      </div>
+
+      <div class="facility-card">
+        <img src="/static/computer-lab.jpg" alt="Computer Lab" />
+        <h3>Computer Lab</h3>
+        <p>High-tech computer laboratory with internet access</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Ready to Join Our Community?</h2>
+      <p>Take the first step towards your future success</p>
+      <div class="cta-buttons">
+        <a href="#" class="cta-btn primary">Apply Now</a>
+        <a href="#" class="cta-btn secondary">Schedule a Visit</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Carousel functionality
+    const slides = document.querySelectorAll(".carousel-slide");
+    const dots = document.querySelectorAll(".dot");
+    const prevBtn = document.querySelector(".carousel-btn.prev");
+    const nextBtn = document.querySelector(".carousel-btn.next");
+    let currentSlide = 0;
+    const slideCount = slides.length;
+
+    function showSlide(index) {
+      // Hide all slides
+      slides.forEach((slide) => {
+        slide.classList.remove("active");
+      });
+
+      // Remove active class from all dots
+      dots.forEach((dot) => {
+        dot.classList.remove("active");
+      });
+
+      // Show the current slide and activate dot
+      slides[index].classList.add("active");
+      dots[index].classList.add("active");
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideCount;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+      showSlide(currentSlide);
+    }
+
+    // Set up event listeners
+    if (prevBtn) prevBtn.addEventListener("click", prevSlide);
+    if (nextBtn) nextBtn.addEventListener("click", nextSlide);
+
+    // Set up dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+
+    // Auto advance slides
+    setInterval(nextSlide, 5000);
+
+    // Animate stats numbers
+    const statNumbers = document.querySelectorAll(".stat-number");
+
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: "0px 0px -100px 0px",
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const statElement = entry.target;
+          const targetValue = parseInt(statElement.getAttribute("data-count"));
+          let currentValue = 0;
+          const duration = 2000;
+          const stepTime = 50;
+          const totalSteps = duration / stepTime;
+          const stepValue = targetValue / totalSteps;
+
+          statElement.style.opacity = "1";
+
+          const counter = setInterval(() => {
+            currentValue += stepValue;
+            if (currentValue >= targetValue) {
+              statElement.textContent =
+                targetValue + (targetValue === 96 ? "%" : "+");
+              clearInterval(counter);
+            } else {
+              statElement.textContent =
+                Math.floor(currentValue) + (targetValue === 96 ? "%" : "+");
+            }
+          }, stepTime);
+
+          statsObserver.unobserve(statElement);
+        }
+      });
+    }, observerOptions);
+
+    statNumbers.forEach((stat) => {
+      stat.style.opacity = "0";
+      statsObserver.observe(stat);
+    });
+  });
+</script>
+{% endblock %}
