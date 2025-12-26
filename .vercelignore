@@ -20,3 +20,4 @@ out/
 .fusebox/
 .dynamodb/
 .tern-port
+api/
