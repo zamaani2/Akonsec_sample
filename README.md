@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # School Website
 
 A Django-based school management system with comprehensive features for student, teacher, and course management.
@@ -110,3 +111,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Django team for the amazing framework
 - Bootstrap for the responsive design components
 - Render.com for hosting 
+=======
+# Akonsec_sample
+>>>>>>> 512359df449e299b070c8fc7753b794e4785c5fa
