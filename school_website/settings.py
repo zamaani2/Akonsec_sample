@@ -150,10 +150,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
+# Directories where Django will search for additional static files.
+# Do NOT include STATIC_ROOT here — that causes staticfiles.E002.
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "staticfiles"),
 ]
+# Directory where `collectstatic` will collect files for deployment
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 

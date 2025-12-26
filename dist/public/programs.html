@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Akontombra Senior High School - Empowering Minds, Shaping Futures. Quality education in Western North Region, Ghana."
+    />
+    <meta
+      name="keywords"
+      content="Akontombra SHS, Senior High School, Education, Ghana, Western North Region"
+    />
+    <meta name="author" content="Akontombra Senior High School" />
+    <title>
+      Akontombra Senior High School - Empowering Minds, Shaping Futures
+    </title>
+
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <div class="container-fluid">
+        <nav class="nav-container">
+          <a href="/" class="logo">
+            <img src="/static/LOGO2.png" alt="Akontombra SHS Logo" />
+            <span>AKONSEC</span>
+          </a>
+          <button class="mobile-menu-btn" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="main-nav">
+            <a
+              class="nav-link "
+              href="/"
+              ><i class="fas fa-home"></i> Home</a
+            >
+            <a
+              class="nav-link "
+              href="/programs/"
+              ><i class="fas fa-graduation-cap"></i> Academics</a
+            >
+            <a
+              class="nav-link "
+              href="/about/"
+              ><i class="fas fa-info-circle"></i> About Us</a
+            >
+            <a
+              class="nav-link "
+              href="/gallery/"
+              ><i class="fas fa-images"></i> Gallery</a
+            >
+            <a
+              class="nav-link "
+              href="/contact/"
+              ><i class="fas fa-envelope"></i> Contact</a
+            >
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+<style>
+  :root {
+    --primary-color: #1a4d2e;
+    --primary-light: #2a6d4e;
+    --secondary-color: #ffd700;
+    --white: #ffffff;
+    --gray: #666666;
+    --dark-gray: #333333;
+    --background-light: #f7f9fc;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Arial", sans-serif;
+  }
+
+  body {
+    padding-top: 60px;
+    background-color: var(--background-light);
+    color: var(--gray);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .container > *:not(.hero) {
+    padding: 2rem;
+  }
+
+  /* Hero Section - Modern Design */
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: -60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    visibility: hidden;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-section {
+    width: 100%;
+    height: 100%;
+    background-size: cover !important;
+    background-position: center !important;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .carousel-slide.active .hero-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+  }
+
+  .carousel-btn.prev {
+    left: 20px;
+  }
+
+  .carousel-btn.next {
+    right: 20px;
+  }
+
+  .carousel-btn i {
+    font-size: 1.5rem;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--secondary-color);
+    transform: scale(1.2);
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .hero-title span {
+    color: var(--secondary-color);
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .hero-btn {
+    padding: 1rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+
+  .hero-btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: -1;
+  }
+
+  .hero-btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+  }
+
+  .hero-btn-primary:hover {
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-btn-primary:before {
+    background-color: var(--primary-color);
+  }
+
+  .hero-btn-primary:hover:before {
+    width: 100%;
+  }
+
+  .hero-btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    backdrop-filter: blur(5px);
+  }
+
+  .hero-btn-secondary:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-btn-secondary:before {
+    background-color: var(--white);
+  }
+
+  .hero-btn-secondary:hover:before {
+    width: 100%;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-text {
+    font-size: 1rem;
+    opacity: 0.8;
+  }
+
+  .section-title {
+    position: relative;
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .section-title::before {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    border-radius: 4px;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+      width: 40px;
+    }
+    50% {
+      opacity: 0.5;
+      width: 60px;
+    }
+    100% {
+      opacity: 1;
+      width: 40px;
+    }
+  }
+
+  .section-subtitle {
+    font-size: 1.3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 1.5rem auto 3.5rem;
+    color: var(--gray);
+    line-height: 1.8;
+    font-weight: 400;
+  }
+
+  /* Leadership Section - Modern Design */
+  .leadership {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 4rem auto;
+    max-width: 1200px;
+    perspective: 1000px;
+  }
+
+  .leader {
+    width: 280px;
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .leader:hover {
+    transform: translateY(-15px) rotateX(5deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .leader::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .leader:hover::before {
+    transform: scaleX(1);
+  }
+
+  .leader::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(26, 77, 46, 0.03), transparent);
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .leader:hover::after {
+    opacity: 1;
+  }
+
+  .leader img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin-bottom: 1.8rem;
+    object-fit: cover;
+    border: 5px solid var(--white);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader:hover img {
+    transform: scale(1.1) translateY(-10px);
+    border-color: var(--secondary-color);
+  }
+
+  .leader h4 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+
+  .leader p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gray);
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--primary-light)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    background-color: rgba(26, 77, 46, 0.05);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Programs Section */
+  .programs-wrapper {
+    padding: 3rem 0;
+    background: linear-gradient(
+      to bottom right,
+      rgba(26, 77, 46, 0.03),
+      rgba(255, 215, 0, 0.03)
+    );
+    border-radius: 20px;
+    margin-top: 3rem;
+  }
+
+  .programs-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(10px);
+  }
+
+  .filter-btn {
+    padding: 0.7rem 1.4rem;
+    background-color: transparent;
+    color: var(--gray);
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .filter-btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      var(--primary-color),
+      var(--primary-light)
+    );
+    border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .filter-btn:hover:before,
+  .filter-btn.active:before {
+    opacity: 1;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    color: var(--white);
+    box-shadow: 0 5px 15px rgba(26, 77, 46, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 0 1rem;
+  }
+
+  .program {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .program:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(
+      90deg,
+      var(--primary-color),
+      var(--secondary-color)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .program:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .program:hover:before {
+    transform: scaleX(1);
+  }
+
+  .program .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 77, 46, 0.1),
+      rgba(26, 77, 46, 0.2)
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: rotate(0deg);
+  }
+
+  .program:hover .icon-wrapper {
+    background: linear-gradient(
+      135deg,
+      var(--primary-color),
+      var(--primary-light)
+    );
+    transform: rotate(5deg) scale(1.1);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .program i {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .program:hover i {
+    color: var(--white);
+    transform: scale(1.1);
+  }
+
+  .program h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .program p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--gray);
+  }
+
+  .program ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-top: auto;
+    font-size: 0.95rem;
+    background: linear-gradient(to bottom right, #f9f9f9, #f5f5f5);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+  }
+
+  .program ul li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.8rem;
+    color: var(--dark-gray);
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .program ul li:last-child {
+    border-bottom: none;
+  }
+
+  .program ul li:hover {
+    color: var(--primary-color);
+    transform: translateX(3px);
+  }
+
+  .program ul li::before {
+    content: "✓";
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(26, 77, 46, 0.1);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .program ul li:hover::before {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 3rem;
+    padding: 1.2rem 2.5rem;
+    background: linear-gradient(
+      45deg,
+      var(--primary-color),
+      var(--primary-light)
+    );
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: none;
+    box-shadow: 0 10px 20px rgba(26, 77, 46, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--secondary-color);
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: -1;
+  }
+
+  .btn:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(26, 77, 46, 0.3);
+  }
+
+  .btn:hover:before {
+    width: 100%;
+  }
+
+  /* Animation for number counter */
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .programs-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      padding: 0 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .programs-filter {
+      padding: 0.8rem;
+      max-width: 90%;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      padding: 0 1.5rem;
+    }
+
+    .programs-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      gap: 15px;
+    }
+
+    .hero-content {
+      padding: 2rem 1rem;
+    }
+
+    .carousel-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-btn.prev {
+      left: 10px;
+    }
+
+    .carousel-btn.next {
+      right: 10px;
+    }
+
+    .leader {
+      width: 260px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .hero-buttons {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .hero-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .programs-filter {
+      gap: 8px;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Modern animations */
+  .zoom-in {
+    animation: zoomIn 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .slide-in-right {
+    animation: slideInRight 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .slide-in-left {
+    animation: slideInLeft 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Carousel Styles - Modern Design */
+  .carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+
+  .carousel-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5rem 2rem;
+    color: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  .carousel-slide.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .carousel-slide:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    color: var(--white);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .carousel-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-btn.prev {
+    left: 20px;
+  }
+
+  .carousel-btn.next {
+    right: 20px;
+  }
+
+  .carousel-btn i {
+    font-size: 1.2rem;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 8px 15px;
+    border-radius: 30px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .dot.active {
+    background: var(--secondary-color);
+    transform: scale(1.2);
+    border-color: var(--white);
+  }
+
+  /* Hero Section */
+  .programs-hero {
+    background: linear-gradient(rgba(26, 77, 46, 0.7), rgba(26, 77, 46, 0.7)),
+      url("https://source.unsplash.com/1600x600/?school,campus") center/cover
+        no-repeat;
+    padding: 90px 0 60px 0;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .programs-hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .programs-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+  }
+
+  /* Main Layout */
+  .programs-main {
+    max-width: 1200px;
+    margin: -40px auto 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    padding: 40px 30px;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin: 50px 0;
+    padding: 40px 20px;
+    background: linear-gradient(
+      45deg,
+      rgba(26, 77, 46, 0.03) 0%,
+      rgba(26, 77, 46, 0.06) 100%
+    );
+    border-radius: 15px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+
+  .stat-card {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .stat-icon {
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 15px;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a4d2e;
+    margin-bottom: 5px;
+  }
+
+  .stat-text {
+    color: #666;
+    font-size: 1rem;
+  }
+</style>
+
+<div class="programs-hero">
+  <div class="programs-hero-content">
+    <h1>Academic Programs at Akontombra SHS</h1>
+    <p>
+      Discover our comprehensive range of academic programs designed for
+      excellence.
+    </p>
+  </div>
+</div>
+
+<div class="programs-main">
+  <div class="stats-section">
+    <h2 class="section-title">Our Academic Excellence</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="stat-number" data-count="25">25+</div>
+        <div class="stat-text">Years of Excellence</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="stat-number" data-count="96">96%</div>
+        <div class="stat-text">Graduation Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <div class="stat-number" data-count="65">65</div>
+        <div class="stat-text">Qualified Teachers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="stat-number" data-count="5">5</div>
+        <div class="stat-text">Academic Programs</div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="section-title">Heads of Department</h1>
+
+  <div class="leadership" id="leadershipTeam">
+    <div class="leader">
+      <img src="/static/no_user_img.png" alt="Science Department Head" />
+      <h4>Mr. Cherubrin Ahuble</h4>
+      <p>Science Department</p>
+    </div>
+    <div class="leader">
+      <img src="/static/agric_hod.jpg" alt="Agric Department Head" />
+      <h4>Mr. Michael Koranche</h4>
+      <p>Agriculture Department</p>
+    </div>
+    <div class="leader">
+      <img src="/static/no_user_img.png" alt="ICT Department Head" />
+      <h4></h4>
+      <p>General Arts Department</p>
+    </div>
+    <div class="leader">
+      <img src="/static/no_user_img.png" alt="Business Department Head" />
+      <h4>Mr. David Ahiadu</h4>
+      <p>Business Department</p>
+    </div>
+    <div class="leader">
+      <img src="/static/ict_hod.png" alt="ICT Department Head" />
+      <h4>Mr. Amanamah Sampson</h4>
+      <p>ICT Department</p>
+    </div>
+    <div class="leader">
+      <img src="/static/no_user_img.png" alt="ICT Department Head" />
+      <h4>Madam Peace Akua</h4>
+      <p>Home Economics Department</p>
+    </div>
+    <div class="leader">
+      <img src="/static/no_user_img.png" alt="ICT Department Head" />
+      <h4>Mr. Darius</h4>
+      <p>Mathematics Department</p>
+    </div>
+  </div>
+
+  <div class="programs-wrapper">
+    <h2 class="section-title">Academic Programs</h2>
+    <p class="section-subtitle">
+      Explore a variety of academic disciplines designed to prepare students for
+      excellence.
+    </p>
+
+    <div class="programs-filter">
+      <button class="filter-btn active" data-filter="all">All Programs</button>
+      <button class="filter-btn" data-filter="mandatory">Mandatory</button>
+      <button class="filter-btn" data-filter="science">Science</button>
+      <button class="filter-btn" data-filter="business">Business</button>
+      <button class="filter-btn" data-filter="arts">General Arts</button>
+      <button class="filter-btn" data-filter="home">Home Economics</button>
+      <button class="filter-btn" data-filter="agric">
+        Agricultural Science
+      </button>
+    </div>
+
+    <div class="programs-grid" id="programsGrid">
+      <div class="program" data-category="mandatory">
+        <div class="icon-wrapper">
+          <i class="fas fa-book"></i>
+        </div>
+        <h3>Mandatory Courses</h3>
+        <p>Compulsory for all students</p>
+        <ul>
+          <li>Core Mathematics</li>
+          <li>Integrated Science</li>
+          <li>English Language</li>
+          <li>Social Studies</li>
+          <li>Robotics</li>
+          <li>Physical Education</li>
+        </ul>
+      </div>
+
+      <div class="program" data-category="science">
+        <div class="icon-wrapper">
+          <i class="fas fa-flask"></i>
+        </div>
+        <h3>Science</h3>
+        <p>STEM-related subjects</p>
+        <ul>
+          <li>Physics</li>
+          <li>Chemistry</li>
+          <li>Biology</li>
+          <li>Additional Mathematics</li>
+          <li>Geography</li>
+        </ul>
+      </div>
+
+      <div class="program" data-category="business">
+        <div class="icon-wrapper">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <h3>Business</h3>
+        <p>Commerce and management</p>
+        <ul>
+          <li>Accounting</li>
+          <li>Business Management</li>
+          <li>Economics</li>
+          <li>Costing</li>
+          <li>Computing</li>
+          <li>Agriculture</li>
+        </ul>
+      </div>
+
+      <div class="program" data-category="home">
+        <div class="icon-wrapper">
+          <i class="fas fa-utensils"></i>
+        </div>
+        <h3>Home Economics</h3>
+        <p>Practical domestic skills</p>
+        <ul>
+          <li>Management In Living</li>
+          <li>Economics</li>
+          <li>Textile and Clothing</li>
+          <li>Chemistry</li>
+          <li>Biology</li>
+          <li>Food and Nutrition</li>
+        </ul>
+      </div>
+
+      <div class="program" data-category="arts">
+        <div class="icon-wrapper">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3>General Arts</h3>
+        <p>Literature and social sciences</p>
+        <ul>
+          <li>Government</li>
+          <li>Literature in English</li>
+          <li>History</li>
+          <li>Geography</li>
+          <li>Christian Religious Studies</li>
+          <li>ICT</li>
+          <li>Additional Mathematics</li>
+          <li>Asante Twi</li>
+        </ul>
+      </div>
+
+      <div class="program" data-category="agric">
+        <div class="icon-wrapper">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Agricultural Science</h3>
+        <p>Sustainable agriculture</p>
+        <ul>
+          <li>General Agriculture</li>
+          <li>Animal Husbandry</li>
+          <li>Crop Husbandry</li>
+          <li>Additional Mathematics</li>
+          <li>Business Studies</li>
+          <li>Chemistry</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center">
+      <a href="#contact" class="btn">Inquire About Programs</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Add typing effect to hero heading
+    const heroHeading = document.querySelector(".programs-hero-content h1");
+    if (heroHeading) {
+      const text = heroHeading.textContent;
+      heroHeading.textContent = "";
+
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        if (i < text.length) {
+          heroHeading.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }, 50);
+    }
+
+    // Animate stats numbers
+    const statNumbers = document.querySelectorAll(".stat-number");
+
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: "0px 0px -100px 0px",
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const statElement = entry.target;
+          const targetValue = parseInt(statElement.getAttribute("data-count"));
+          let currentValue = 0;
+          const duration = 2000;
+          const stepTime = 50;
+          const totalSteps = duration / stepTime;
+          const stepValue = targetValue / totalSteps;
+
+          statElement.style.opacity = "1";
+
+          const counter = setInterval(() => {
+            currentValue += stepValue;
+            if (currentValue >= targetValue) {
+              statElement.textContent =
+                targetValue + (targetValue === 96 ? "%" : "+");
+              clearInterval(counter);
+            } else {
+              statElement.textContent =
+                Math.floor(currentValue) + (targetValue === 96 ? "%" : "+");
+            }
+          }, stepTime);
+
+          statsObserver.unobserve(statElement);
+        }
+      });
+    }, observerOptions);
+
+    statNumbers.forEach((stat) => {
+      stat.style.opacity = "0";
+      statsObserver.observe(stat);
+    });
+
+    // Program filtering
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const programs = document.querySelectorAll(".program");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        // Remove active class from all buttons
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+
+        // Add active class to clicked button
+        this.classList.add("active");
+
+        const filterValue = this.getAttribute("data-filter");
+
+        programs.forEach((program) => {
+          if (
+            filterValue === "all" ||
+            program.getAttribute("data-category") === filterValue
+          ) {
+            program.style.display = "block";
+            setTimeout(() => {
+              program.style.opacity = "1";
+              program.style.transform = "translateY(0)";
+            }, 50);
+          } else {
+            program.style.opacity = "0";
+            program.style.transform = "translateY(20px)";
+            setTimeout(() => {
+              program.style.display = "none";
+            }, 300);
+          }
+        });
+      });
+    });
+  });
+</script>
+</main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section contact-section">
+            <h3><i class="fas fa-map-marker-alt"></i> Contact Us</h3>
+            <ul class="contact-list">
+              <li>Akontombra, Western North Region</li>
+              <li><i class="fas fa-phone"></i> +233 XX XXX XXXX</li>
+              <li><i class="fas fa-envelope"></i> info@akontombrashs.edu.gh</li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3><i class="fas fa-link"></i> Quick Links</h3>
+            <div class="quick-links">
+              <a href="/about/">About Us</a>
+              <a href="/programs/">Academics</a>
+              <a href="#admission">Admissions</a>
+              <a href="#news">News & Events</a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3><i class="fas fa-share-alt"></i> Connect</h3>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook" title="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="Twitter" title="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram" title="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn" title="LinkedIn"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>
+            &copy; 2025 Akontombra Senior High School. All Rights
+            Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+      const mainNav = document.querySelector(".main-nav");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+      });
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          if (this.getAttribute("href") !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

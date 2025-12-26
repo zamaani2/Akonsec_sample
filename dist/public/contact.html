@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Akontombra Senior High School - Empowering Minds, Shaping Futures. Quality education in Western North Region, Ghana."
+    />
+    <meta
+      name="keywords"
+      content="Akontombra SHS, Senior High School, Education, Ghana, Western North Region"
+    />
+    <meta name="author" content="Akontombra Senior High School" />
+    <title>
+      Akontombra Senior High School - Empowering Minds, Shaping Futures
+    </title>
+
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <div class="container-fluid">
+        <nav class="nav-container">
+          <a href="/" class="logo">
+            <img src="/static/LOGO2.png" alt="Akontombra SHS Logo" />
+            <span>AKONSEC</span>
+          </a>
+          <button class="mobile-menu-btn" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="main-nav">
+            <a
+              class="nav-link "
+              href="/"
+              ><i class="fas fa-home"></i> Home</a
+            >
+            <a
+              class="nav-link "
+              href="/programs/"
+              ><i class="fas fa-graduation-cap"></i> Academics</a
+            >
+            <a
+              class="nav-link "
+              href="/about/"
+              ><i class="fas fa-info-circle"></i> About Us</a
+            >
+            <a
+              class="nav-link "
+              href="/gallery/"
+              ><i class="fas fa-images"></i> Gallery</a
+            >
+            <a
+              class="nav-link "
+              href="/contact/"
+              ><i class="fas fa-envelope"></i> Contact</a
+            >
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+<style>
+  :root {
+    --primary-color: #1a4d2e;
+    --primary-light: #2a6d4e;
+    --secondary-color: #ffd700;
+    --white: #ffffff;
+    --gray: #666666;
+    --dark-gray: #333333;
+    --background-light: #f7f9fc;
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", "Arial", sans-serif;
+  }
+
+  body {
+    padding-top: 60px;
+    background-color: var(--background-light);
+    color: var(--gray);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Hero Section */
+  .contact-hero {
+    background: linear-gradient(rgba(26, 77, 46, 0.7), rgba(26, 77, 46, 0.7)),
+      url("https://source.unsplash.com/1600x600/?school,campus") center/cover
+        no-repeat;
+    padding: 90px 0 60px 0;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .contact-hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-family: "Playfair Display", serif;
+  }
+
+  .contact-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.95;
+  }
+
+  /* Main Layout */
+  .contact-main {
+    max-width: 1200px;
+    margin: -40px auto 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+    padding: 40px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  /* Section Styles */
+  .section-title {
+    font-size: 1.8rem;
+    color: #1a4d2e;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #ffd700;
+    border-radius: 2px;
+  }
+
+  /* Contact Info Section */
+  .contact-info-section {
+    flex: 1 1 320px;
+    min-width: 300px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .contact-info-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .contact-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    background: #f7faf7;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(26, 77, 46, 0.06);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .contact-box.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .contact-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(26, 77, 46, 0.13);
+  }
+
+  .contact-box i {
+    font-size: 2rem;
+    color: #1a4d2e;
+    margin-top: 2px;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-box:hover i {
+    transform: scale(1.1);
+  }
+
+  .contact-box h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    color: #1a4d2e;
+  }
+
+  .contact-box p {
+    margin: 0;
+    color: #333;
+    font-size: 1rem;
+  }
+
+  /* Contact Form Section */
+  .contact-form-section {
+    flex: 2 1 400px;
+    min-width: 320px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .contact-form-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-form {
+    background: #f7faf7;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(26, 77, 46, 0.06);
+    padding: 28px 24px 20px 24px;
+    margin-top: 10px;
+  }
+
+  .form-group {
+    margin-bottom: 18px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+  }
+
+  .form-group.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #1a4d2e;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1.5px solid #cfd8cf;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fff;
+    transition: all 0.3s ease;
+    margin-top: 2px;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border: 1.5px solid #1a4d2e;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 77, 46, 0.1);
+  }
+
+  .contact-form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #1a4d2e 60%, #ffd700 100%);
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(26, 77, 46, 0.08);
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .contact-form button.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-form button:hover {
+    background: linear-gradient(90deg, #ffd700 60%, #1a4d2e 100%);
+    color: #1a4d2e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 77, 46, 0.15);
+  }
+
+  /* Map Section */
+  .map-section {
+    width: 100%;
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+
+  .map-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(26, 77, 46, 0.08);
+    margin-top: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .map-container:hover {
+    box-shadow: 0 4px 16px rgba(26, 77, 46, 0.12);
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 350px;
+    border: none;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .contact-main {
+      flex-direction: column;
+      gap: 30px;
+      padding: 30px 20px;
+    }
+
+    .contact-info-section,
+    .contact-form-section {
+      min-width: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .contact-main {
+      padding: 30px 20px;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .contact-hero {
+      padding: 60px 0 40px 0;
+    }
+
+    .contact-hero-content h1 {
+      font-size: 1.8rem;
+    }
+
+    .contact-hero-content p {
+      font-size: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .map-container iframe {
+      height: 250px;
+    }
+  }
+</style>
+
+<div class="contact-hero">
+  <div class="contact-hero-content">
+    <h1>Contact Akontombra Senior High School</h1>
+    <p>We'd love to hear from you! Reach out to us anytime.</p>
+  </div>
+</div>
+
+<div class="contact-main">
+  <div class="contact-info-section">
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="contact-details">
+      <div class="contact-box">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+          <h3>Address</h3>
+          <p>Akontombra, Western North Region, Ghana</p>
+        </div>
+      </div>
+      <div class="contact-box">
+        <i class="fas fa-phone"></i>
+        <div>
+          <h3>Phone</h3>
+          <p>+233 54 107 4220</p>
+        </div>
+      </div>
+      <div class="contact-box">
+        <i class="fas fa-envelope"></i>
+        <div>
+          <h3>Email</h3>
+          <p>info@akontombrashs.edu.gh</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-section">
+    <h2 class="section-title">Send Us a Message</h2>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea
+          id="message"
+          rows="5"
+          placeholder="Type your message here..."
+          required
+        ></textarea>
+      </div>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <div class="map-section">
+    <h2 class="section-title">Find Us on the Map</h2>
+    <div class="map-container">
+      <iframe
+        width="100%"
+        height="350"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-2.7938,5.9723,-2.7898,5.9753&amp;layer=mapnik&amp;marker=5.9738,-2.7918"
+        style="border: 1px solid #ddd"
+      >
+      </iframe>
+      <small>
+        <a
+          href="https://www.openstreetmap.org/?mlat=5.9738&amp;mlon=-2.7918#map=18/5.9738/-2.7918"
+          target="_blank"
+          >View Larger Map</a
+        >
+      </small>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Add typing effect to hero heading
+    const heroHeading = document.querySelector(".contact-hero-content h1");
+    if (heroHeading) {
+      const text = heroHeading.textContent;
+      heroHeading.textContent = "";
+
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        if (i < text.length) {
+          heroHeading.textContent += text.charAt(i);
+          i++;
+        } else {
+          clearInterval(typeInterval);
+        }
+      }, 50);
+    }
+
+    // Animate sections on scroll
+    const sections = document.querySelectorAll(
+      ".contact-info-section, .contact-form-section, .map-section"
+    );
+    const contactBoxes = document.querySelectorAll(".contact-box");
+    const formGroups = document.querySelectorAll(".form-group");
+    const submitButton = document.querySelector(".contact-form button");
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const sectionsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          sectionsObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => {
+      sectionsObserver.observe(section);
+    });
+
+    // Animate contact boxes with delay
+    contactBoxes.forEach((box, index) => {
+      setTimeout(() => {
+        box.classList.add("visible");
+      }, 300 * (index + 1));
+    });
+
+    // Animate form groups with delay
+    formGroups.forEach((group, index) => {
+      setTimeout(() => {
+        group.classList.add("visible");
+      }, 200 * (index + 1));
+    });
+
+    // Animate submit button
+    setTimeout(() => {
+      submitButton.classList.add("visible");
+    }, 1000);
+
+    // Form submission handling
+    const contactForm = document.querySelector(".contact-form");
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Add loading state to button
+      const button = this.querySelector("button");
+      const originalText = button.textContent;
+      button.textContent = "Sending...";
+      button.style.opacity = "0.7";
+
+      // Simulate form submission (replace with actual form submission)
+      setTimeout(() => {
+        button.textContent = "Message Sent!";
+        button.style.background =
+          "linear-gradient(90deg, #28a745 60%, #20c997 100%)";
+
+        // Reset form
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background =
+            "linear-gradient(90deg, #1a4d2e 60%, #ffd700 100%)";
+          button.style.opacity = "1";
+          contactForm.reset();
+        }, 2000);
+      }, 1500);
+    });
+  });
+</script>
+</main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section contact-section">
+            <h3><i class="fas fa-map-marker-alt"></i> Contact Us</h3>
+            <ul class="contact-list">
+              <li>Akontombra, Western North Region</li>
+              <li><i class="fas fa-phone"></i> +233 XX XXX XXXX</li>
+              <li><i class="fas fa-envelope"></i> info@akontombrashs.edu.gh</li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3><i class="fas fa-link"></i> Quick Links</h3>
+            <div class="quick-links">
+              <a href="/about/">About Us</a>
+              <a href="/programs/">Academics</a>
+              <a href="#admission">Admissions</a>
+              <a href="#news">News & Events</a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3><i class="fas fa-share-alt"></i> Connect</h3>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook" title="Facebook"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" aria-label="Twitter" title="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram" title="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn" title="LinkedIn"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>
+            &copy; 2025 Akontombra Senior High School. All Rights
+            Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+      const mainNav = document.querySelector(".main-nav");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+      });
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          if (this.getAttribute("href") !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
