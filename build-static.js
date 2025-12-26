@@ -101,23 +101,18 @@ console.log('✅ Backend files prepared');
 
 // Step 6: Create vercel configuration
 console.log('⚙️  Creating Vercel configuration...');
+// Create minimal Vercel configuration for static deployment
 const vercelConfig = {
     "buildCommand": "npm run build",
-    "outputDirectory": "dist",
-    "functions": {
-        "api/**": {
-            "runtime": "python3.11",
-            "memory": 1024,
-            "maxDuration": 30
-        }
-    }
+    "outputDirectory": "dist"
 };
 
 fs.writeFileSync(
     path.join(distDir, 'vercel.json'),
     JSON.stringify(vercelConfig, null, 2)
 );
-console.log('✅ Vercel configuration created');
+
+console.log('✅ Minimal Vercel configuration created');
 
 console.log('\n✨ Build complete! Ready for Vercel deployment.\n');
 console.log('Next steps:');
