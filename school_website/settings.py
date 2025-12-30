@@ -102,17 +102,33 @@ WSGI_APPLICATION = "school_website.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# Use database URL if provided in environment
+# For Vercel, SQLite won't work (read-only filesystem)
+# Use DATABASE_URL environment variable for production
 DATABASE_URL = os.environ.get("DATABASE_URL")
+
 if DATABASE_URL:
-    DATABASES["default"] = dj_database_url.parse(DATABASE_URL)
+    try:
+        DATABASES = {
+            "default": dj_database_url.parse(DATABASE_URL)
+        }
+    except Exception as e:
+        print(f"Error parsing DATABASE_URL: {e}")
+        # Fallback to SQLite for local development
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.sqlite3",
+                "NAME": BASE_DIR / "db.sqlite3",
+            }
+        }
+else:
+    # Fallback to SQLite for local development
+    # Note: This will fail on Vercel's read-only filesystem
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
