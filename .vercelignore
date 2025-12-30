@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Development files
+DEV_SERVER_INSTRUCTIONS.md
+run_dev_server.bat
+run_dev_server.py
+build.sh
+Procfile
+render.yaml
+runtime.txt
+
+# SSL Certificates
+certs/
+ssl_certs/
+
+# Keep static source files but ignore collected staticfiles during build
+# Static files will be collected during Vercel build

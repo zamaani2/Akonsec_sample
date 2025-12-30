@@ -27,10 +27,10 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.environ.get(
-    "ALLOWED_HOSTS", "localhost,127.0.0.1,.onrender.com"
+    "ALLOWED_HOSTS", "localhost,127.0.0.1,.onrender.com,.vercel.app,.vercel.app"
 ).split(",")
 
 
