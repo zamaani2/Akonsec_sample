@@ -33,6 +33,9 @@ ALLOWED_HOSTS = os.environ.get(
     "ALLOWED_HOSTS", "localhost,127.0.0.1,.onrender.com,.vercel.app,.vercel.sh"
 ).split(",")
 
+# Clean up ALLOWED_HOSTS (remove empty strings and strip whitespace)
+ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
+
 
 # Application definition
 
