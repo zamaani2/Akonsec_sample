@@ -11,10 +11,10 @@ This guide will help you deploy your Django-based school website to Vercel.
 
 ## Important Notes
 
-⚠️ **Database Configuration**: Vercel serverless functions are stateless. You'll need an external database:
-- **Recommended**: Use Vercel Postgres, Supabase, or Railway for PostgreSQL
-- Update `DATABASE_URL` environment variable in Vercel dashboard
-- SQLite (db.sqlite3) will NOT work in production on Vercel
+✅ **Static Website**: This is a static website deployment - no database or serverless functions needed!
+- All pages are pre-rendered as static HTML files
+- Static files (CSS, JS, images) are served directly
+- No backend server required
 
 ## Deployment Steps
 
@@ -28,18 +28,18 @@ python manage.py collectstatic --noinput
 pip freeze > requirements.txt
 ```
 
-### 2. Set Up External Database (Required)
+### 2. Generate Static HTML Files
 
-1. **Create a PostgreSQL database**:
-   - Option A: Vercel Postgres (recommended)
-     - Go to Vercel Dashboard → Storage → Create Database → Postgres
-   - Option B: Supabase (free tier available)
-     - Go to https://supabase.com and create a project
-   - Option C: Railway, Render, or other providers
+Before deploying, render your Django templates to static HTML:
 
-2. **Get your database connection string**:
-   - Format: `postgresql://user:password@host:port/database`
-   - Or use the connection URL provided by your provider
+```bash
+# Render all templates to static HTML files
+python manage.py render_static
+
+# This will create HTML files in dist/public/
+# - home.html → index.html
+# - about.html, programs.html, news.html, etc.
+```
 
 ### 3. Push to Git Repository
 
@@ -54,7 +54,14 @@ git commit -m "Prepare for Vercel deployment"
 git push -u origin main
 ```
 
-### 4. Deploy to Vercel
+### 4. Build Static Site
+
+```bash
+# Build the static site (copies static files and HTML)
+npm run build
+```
+
+### 5. Deploy to Vercel
 
 #### Option A: Using Vercel CLI (Recommended)
 
@@ -80,34 +87,12 @@ vercel --prod
 4. Vercel will auto-detect the configuration from `vercel.json`
 5. Click "Deploy"
 
-### 5. Set Environment Variables
+### 6. Set Environment Variables (Optional)
 
-In Vercel Dashboard → Your Project → Settings → Environment Variables:
-
-**Required Variables:**
-- `DJANGO_SETTINGS_MODULE`: `school_website.settings`
-- `DEBUG`: `False`
-- `SECRET_KEY`: Generate a secure secret key (use `python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"`)
-- `DATABASE_URL`: Your PostgreSQL connection string
-- `ALLOWED_HOSTS`: `*.vercel.app,*.vercel.sh,yourdomain.com` (add your custom domain if applicable)
+For a static site, no environment variables are required! However, if you want to customize the build:
 
 **Optional Variables:**
-- `PYTHONUNBUFFERED`: `1` (already set in vercel.json)
-
-### 6. Run Database Migrations
-
-After first deployment, run migrations:
-
-```bash
-# Using Vercel CLI
-vercel env pull .env.local
-python manage.py migrate
-
-# Or use Vercel's function logs to run migrations
-# You may need to create a management command or use Django admin
-```
-
-**Alternative**: Create a one-time migration script or use Vercel's function to run migrations programmatically.
+- None required for static deployment
 
 ### 7. Verify Deployment
 
@@ -122,18 +107,18 @@ After deployment:
 
 The deployment is configured with:
 
-- **API Handler**: `api/index.py` - Serverless function that handles all Django requests
-- **Static Files**: Served from `/staticfiles/` (collected via `collectstatic`)
-- **Media Files**: Served from `/media/` (if using file uploads)
-- **Configuration**: `vercel.json` - Routing and build configuration
+- **Static HTML Files**: Pre-rendered HTML in `dist/public/`
+- **Static Assets**: CSS, JS, images served from `/static/`
+- **Build Output**: `dist/public/` - This is what Vercel serves
+- **Configuration**: `vercel.json` - Static site configuration
 
 ## Configuration Files
 
-- `vercel.json` - Vercel deployment configuration (routing, builds, env vars)
+- `vercel.json` - Vercel static site configuration
 - `.vercelignore` - Files to exclude from deployment
-- `api/index.py` - Python serverless function entry point (handles all Django requests)
-- `requirements.txt` - Python dependencies
-- `package.json` - Node.js project metadata (for build scripts)
+- `build-static.js` - Build script that prepares static files
+- `package.json` - Node.js project metadata and build scripts
+- `school/management/commands/render_static.py` - Django command to render templates
 
 ## Troubleshooting
 
@@ -155,22 +140,15 @@ The deployment is configured with:
 - Ensure `requirements.txt` is in the root directory
 - Check that all Python dependencies are compatible with Python 3.11
 
-### Database Connection Issues
-- Verify `DATABASE_URL` environment variable is set correctly
-- Ensure database is accessible from Vercel's IP ranges
-- Check database connection string format
-- Verify database migrations have been run
+### Pages Not Loading
+- Ensure `python manage.py render_static` was run before deployment
+- Check that HTML files exist in `dist/public/`
+- Verify `vercel.json` has correct `outputDirectory` set to `dist/public`
 
-### Function Timeout Errors
-- Default timeout is 30 seconds (configured in vercel.json)
-- For longer operations, consider using background jobs
-- Optimize database queries and reduce response time
-
-### 500 Internal Server Error
-- Check function logs in Vercel Dashboard
-- Verify `SECRET_KEY` is set
-- Ensure `ALLOWED_HOSTS` includes your Vercel domain
-- Check that database is properly configured
+### Static Files Not Loading
+- Ensure static files are in `dist/public/static/` after build
+- Check that routes in `vercel.json` correctly map `/static/` paths
+- Verify file paths in HTML templates use `/static/` prefix
 
 ## Next Steps
 

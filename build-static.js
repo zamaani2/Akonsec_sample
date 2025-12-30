@@ -45,11 +45,24 @@ if (fs.existsSync(sourceStaticFilesDir)) {
     console.log('⚠️  No staticfiles directory found');
 }
 
-// Step 4: Create index.html if it doesn't exist
-console.log('📄 Checking for index.html...');
-const indexPath = path.join(publicDir, 'index.html');
-if (!fs.existsSync(indexPath)) {
-    fs.writeFileSync(indexPath, `<!DOCTYPE html>
+// Step 4: Render Django templates to static HTML
+console.log('📄 Rendering Django templates to static HTML...');
+try {
+    // Try to run Django management command to render templates
+    execSync('python manage.py render_static --output dist/public', { 
+        stdio: 'inherit',
+        cwd: __dirname 
+    });
+    console.log('✅ Templates rendered');
+} catch (error) {
+    console.log('⚠️  Could not render templates (Django may not be available during build)');
+    console.log('   Make sure to run: python manage.py render_static before deploying');
+    
+    // Create index.html if it doesn't exist
+    const indexPath = path.join(publicDir, 'index.html');
+    if (!fs.existsSync(indexPath)) {
+        console.log('📄 Creating fallback index.html...');
+        fs.writeFileSync(indexPath, `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -63,56 +76,22 @@ if (!fs.existsSync(indexPath)) {
     <script src="/static/js/programs.js"></script>
 </body>
 </html>`);
-    console.log('✅ Created default index.html');
+        console.log('✅ Created fallback index.html');
+    }
 }
 
-// Step 5: Copy Python backend
-console.log('📦 Preparing Python backend...');
-const apiDir = path.join(__dirname, 'api');
-if (!fs.existsSync(apiDir)) {
-    fs.mkdirSync(apiDir, { recursive: true });
-}
-
-// Copy necessary Python files
-const dirsToKeep = ['school', 'school_website', 'api', 'certs', 'ssl_certs'];
-const filesToKeep = [
-    'manage.py',
-    'requirements.txt',
-    'db.sqlite3'
-];
-
-dirsToKeep.forEach(dir => {
-    const src = path.join(__dirname, dir);
-    const dest = path.join(distDir, dir);
-    if (fs.existsSync(src) && dir !== 'api') {
-        copyDir(src, dest);
+// Step 5: Ensure all HTML files are present
+console.log('📄 Verifying HTML files...');
+const htmlFiles = ['index.html', 'about.html', 'programs.html', 'news.html', 'student_life.html', 'gallery.html', 'contact.html'];
+htmlFiles.forEach(file => {
+    const filePath = path.join(publicDir, file);
+    if (!fs.existsSync(filePath)) {
+        console.log(`⚠️  Missing ${file} - make sure to run: python manage.py render_static`);
     }
 });
 
-filesToKeep.forEach(file => {
-    const src = path.join(__dirname, file);
-    const dest = path.join(distDir, file);
-    if (fs.existsSync(src)) {
-        fs.copyFileSync(src, dest);
-    }
-});
-
-console.log('✅ Backend files prepared');
-
-// Step 6: Create vercel configuration
-console.log('⚙️  Creating Vercel configuration...');
-// Create minimal Vercel configuration for static deployment
-const vercelConfig = {
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist"
-};
-
-fs.writeFileSync(
-    path.join(distDir, 'vercel.json'),
-    JSON.stringify(vercelConfig, null, 2)
-);
-
-console.log('✅ Minimal Vercel configuration created');
+// Step 6: Build complete
+console.log('✅ Static site build complete');
 
 console.log('\n✨ Build complete! Ready for Vercel deployment.\n');
 console.log('Next steps:');
